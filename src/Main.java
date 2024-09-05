@@ -5,7 +5,7 @@ public class Main {
 
         System.out.println("Hello world!");
         System.out.println("Witaj na leckcji");
-        int wylosowana =(int) (Math.random()*10+1);
+        int wylosowana =(int) (Math.random()*100+1);
         System.out.println(wylosowana);
         /*
         typy proste z małej litery, mają tylko wartość
@@ -21,13 +21,39 @@ public class Main {
         System.out.println("Zgadnij licznę z zakresu 1 do 10");
         Scanner klawiatura = new Scanner(System.in);
         int wpisanaLiczba = klawiatura.nextInt();//wczytwanie z klawiatury
-        System.out.println("Wpisana z klawiatury"+wpisanaLiczba);
+        System.out.println("Wpisana z klawiatury"+wpisanaLiczba );
         if (wpisanaLiczba == wylosowana){
             System.out.println("Trafiona Liczba");
         }
         else {
             System.out.println("Nie trafiono spróbuj ponownie");
         }
+        String komunikat = wylosowana == wpisanaLiczba ? "Poprawnie":"Niepoprawnie";
+        System.out.println(komunikat);
+
+        /*
+        instrukcja warunkowe
+         */
+
+       int roznica = wylosowana>wpisanaLiczba? wylosowana - wpisanaLiczba:wpisanaLiczba-wylosowana;
+       roznica = roznica/10; //dzielnie całkowite bo wynik typu int
+        //insturkcja switch
+       switch (roznica){
+           case 0:
+               System.out.println("Brawo ");
+               break;
+           case 1:
+               System.out.println("Bardzo Blisko");
+               break;
+           case 2:
+               System.out.println("Dość Blisko");
+               break;
+           default:
+               System.out.println("Spróbuj szczęścia inny razem");
+       }
+
+
+
 
     }
 }
