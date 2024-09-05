@@ -21,7 +21,7 @@ public class Main {
         System.out.println("Zgadnij licznę z zakresu 1 do 10");
         Scanner klawiatura = new Scanner(System.in);
         int wpisanaLiczba = klawiatura.nextInt();//wczytwanie z klawiatury
-        System.out.println("Wpisana z klawiatury"+wpisanaLiczba );
+        System.out.println("Wpisana z klawiatury "+wpisanaLiczba );
         if (wpisanaLiczba == wylosowana){
             System.out.println("Trafiona Liczba");
         }
@@ -51,7 +51,17 @@ public class Main {
            default:
                System.out.println("Spróbuj szczęścia inny razem");
        }
+       //wyrażenie switch
+        System.out.println(
+                switch (roznica){
+                    case 0 -> "Brawo";
+                    case 1 -> "Bardzo Bliksko";
+                    case 2 -> "Dość Blisko";
+                    default -> "Słabo";
 
+                }
+
+        );
 
 
 
