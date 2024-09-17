@@ -1,0 +1,239 @@
+1. Zadeklaruj tablicę 10 liczb rzeczywistych i wypełnij ją pierwiastkami jej indeksów.
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Deklaracja tablicy 10 liczb rzeczywistych
+        double[] tablica = new double[10];
+        
+        // Wypełnianie tablicy pierwiastkami kwadratowymi indeksów
+        for (int i = 0; i < tablica.length; i++) {
+            // Sprawdzamy, czy indeks jest większy od 0, aby uniknąć pierwiastka z 0
+            tablica[i] = Math.sqrt(i);
+        }
+
+        // Wyświetlanie zawartości tablicy
+        for (int i = 0; i < tablica.length; i++) {
+            System.out.printf("Pierwiastek kwadratowy z %d: %.4f%n", i, tablica[i]);
+        }
+    }
+}
+
+2. Zadeklaruj tablicę 40-elementową i wstaw do niej kolejne liczby ciągu Fibonacciego. Ciąg Fibonacciego to ciąg, w którym każda kolejna liczba jest równa sumie dwóch poprzednich.
+
+
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        // Deklaracja tablicy 40-elementowej
+        long[] fibonacci = new long[40];
+
+        // Wypełnianie tablicy liczbami ciągu Fibonacciego
+        // Pierwsze dwie liczby Fibonacciego
+        fibonacci[0] = 0;
+        fibonacci[1] = 1;
+
+        // Generowanie kolejnych liczb Fibonacciego
+        for (int i = 2; i < fibonacci.length; i++) {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
+
+        // Wyświetlanie zawartości tablicy
+        for (int i = 0; i < fibonacci.length; i++) {
+            System.out.printf("Fibonacci[%d] = %d%n", i, fibonacci[i]);
+        }
+    }
+}
+
+
+
+3.Zadeklaruj tablicę z liczbami całkowitymi i wstaw do niej 100 liczb losowych z zakresu od 1 do 100.
+
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+public class RandomArrayAndCollections {
+    public static void main(String[] args) {
+        // Deklaracja tablicy 100-elementowej
+        int[] tablica = new int[100];
+        
+        // Utworzenie obiektu Random do generowania liczb losowych
+        Random rand = new Random();
+        
+        // Wypełnianie tablicy losowymi liczbami z zakresu od 1 do 100
+        for (int i = 0; i < tablica.length; i++) {
+            tablica[i] = rand.nextInt(100) + 1;
+        }
+        
+        // Deklaracja kolekcji na liczby parzyste i nieparzyste
+        ArrayList<Integer> liczbyParzyste = new ArrayList<>();
+        ArrayList<Integer> liczbyNieparzyste = new ArrayList<>();
+        
+        // Wypełnianie kolekcji liczbami z tablicy
+        for (int num : tablica) {
+            if (num % 2 == 0) {
+                liczbyParzyste.add(num);
+            } else {
+                liczbyNieparzyste.add(num);
+            }
+        }
+
+        // Tworzenie zbiorów dla liczby różnych liczb
+        Set<Integer> unikalneLiczby = new HashSet<>();
+        for (int num : tablica) {
+            unikalneLiczby.add(num);
+        }
+
+        // Wyświetlanie zawartości kolekcji
+        System.out.println("Liczby parzyste:");
+        for (int num : liczbyParzyste) {
+            System.out.println(num);
+        }
+        
+        System.out.println("Liczby nieparzyste:");
+        for (int num : liczbyNieparzyste) {
+            System.out.println(num);
+        }
+        
+        // Wyświetlanie liczby różnych liczb
+        System.out.println("Liczba różnych liczb wylosowanych: " + unikalneLiczby.size());
+    }
+}
+
+
+
+4. Wykorzystaj tablicę z zadania 3. z wylosowanymi wartościami. Posortuj tablicę. Znajdź medianę (wartość środkową tablicy), dominantę (wartość najczęściej występującą w tablicy) i wartość średnią wartości zapisanych w tablicy.
+
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class ArrayStatistics {
+    public static void main(String[] args) {
+        // Deklaracja tablicy 100-elementowej
+        int[] tablica = new int[100];
+        
+        // Utworzenie obiektu Random do generowania liczb losowych
+        Random rand = new Random();
+        
+        // Wypełnianie tablicy losowymi liczbami z zakresu od 1 do 100
+        for (int i = 0; i < tablica.length; i++) {
+            tablica[i] = rand.nextInt(100) + 1;
+        }
+        
+        // Sortowanie tablicy
+        Arrays.sort(tablica);
+
+        // Obliczanie mediany
+        double mediana;
+        if (tablica.length % 2 == 0) {
+            // Jeżeli liczba elementów jest parzysta, mediana to średnia dwóch środkowych wartości
+            mediana = (tablica[tablica.length / 2 - 1] + tablica[tablica.length / 2]) / 2.0;
+        } else {
+            // Jeżeli liczba elementów jest nieparzysta, mediana to środkowa wartość
+            mediana = tablica[tablica.length / 2];
+        }
+        
+        // Obliczanie średniej
+        double suma = 0;
+        for (int num : tablica) {
+            suma += num;
+        }
+        double srednia = suma / tablica.length;
+        
+        // Obliczanie dominanty
+        Map<Integer, Integer> licznik = new HashMap<>();
+        for (int num : tablica) {
+            licznik.put(num, licznik.getOrDefault(num, 0) + 1);
+        }
+        
+        int dominanta = tablica[0];
+        int maxLicznik = 0;
+        for (Map.Entry<Integer, Integer> entry : licznik.entrySet()) {
+            if (entry.getValue() > maxLicznik) {
+                dominanta = entry.getKey();
+                maxLicznik = entry.getValue();
+            }
+        }
+        
+        // Wyświetlanie wyników
+        System.out.println("Posortowana tablica:");
+        for (int num : tablica) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        System.out.println("Mediana: " + mediana);
+        System.out.println("Dominanta: " + dominanta);
+        System.out.println("Średnia: " + srednia);
+    }
+}
+
+
+
+
+5.Wygeneruj tablicę liczb pierwszych mniejszych od 1000. Wykorzystaj do tego sito Eratostenesa. Wypisz wszystkie liczby pierwsze z zakresu od x do y, gdzie x0 i x,y <1000.
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SieveOfEratosthenes {
+    public static void main(String[] args) {
+        final int MAX = 1000;
+        
+        // Tablica boolean do oznaczania liczb pierwszych
+        boolean[] czyPierwsze = new boolean[MAX];
+        for (int i = 2; i < MAX; i++) {
+            czyPierwsze[i] = true;
+        }
+        
+        // Sito Eratostenesa
+        for (int p = 2; p * p < MAX; p++) {
+            if (czyPierwsze[p]) {
+                for (int i = p * p; i < MAX; i += p) {
+                    czyPierwsze[i] = false;
+                }
+            }
+        }
+        
+        // Lista do przechowywania liczb pierwszych
+        List<Integer> liczbyPierwsze = new ArrayList<>();
+        for (int i = 2; i < MAX; i++) {
+            if (czyPierwsze[i]) {
+                liczbyPierwsze.add(i);
+            }
+        }
+
+        // Zakres do wypisania (przykładowe wartości x i y)
+        int x = 100; // Możesz zmienić tę wartość
+        int y = 200; // Możesz zmienić tę wartość
+        
+        // Sprawdzanie, czy x i y są w odpowiednim zakresie
+        if (x < 0 || y >= MAX || x > y) {
+            System.out.println("Zakres niepoprawny. Upewnij się, że 0 <= x <= y < 1000.");
+            return;
+        }
+        
+        // Wypisywanie liczb pierwszych w zadanym zakresie
+        System.out.println("Liczby pierwsze z zakresu od " + x + " do " + y + ":");
+        for (int num : liczbyPierwsze) {
+            if (num >= x && num <= y) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+    }
+}
+	
+
+
+
+
+
+
